@@ -1,2 +1,3 @@
-# Flwr-Kurtis-E1-SFT
-Flwr-Kurtis-E1-SFT
+# Flwr-Kurtis-E1.1-Zero
+
+Pseudo-pretraining experiment.
