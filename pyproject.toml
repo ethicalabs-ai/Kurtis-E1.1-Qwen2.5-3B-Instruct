@@ -33,10 +33,10 @@ clientapp = "kurtis_e1.client_app:app"
 
 [tool.flwr.app.config]
 use-wandb = true
-model.name = "Qwen/Qwen2.5-0.5B-Instruct"
+model.name = "Qwen/Qwen2.5-3B-Instruct"
 model.quantization = 4
 model.gradient-checkpointing = true
-model.lora.peft-lora-r = 32
+model.lora.peft-lora-r = 16
 model.lora.peft-lora-alpha = 64
 model.lora.peft-use-dora = true
 train.save-every-round = 5
@@ -45,7 +45,7 @@ train.learning-rate-min = 1e-6
 train.seq-length = 1024
 train.training-arguments.output-dir = ""
 train.training-arguments.learning-rate = ""
-train.training-arguments.per-device-train-batch-size = 16
+train.training-arguments.per-device-train-batch-size = 8
 train.training-arguments.gradient-accumulation-steps = 1
 train.training-arguments.logging-steps = 1
 train.training-arguments.num-train-epochs = 3
