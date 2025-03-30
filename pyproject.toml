@@ -36,8 +36,8 @@ use-wandb = true
 model.name = "Qwen/Qwen2.5-3B-Instruct"
 model.quantization = 4
 model.gradient-checkpointing = true
-model.lora.peft-lora-r = 8
-model.lora.peft-lora-alpha = 32
+model.lora.peft-lora-r = 16
+model.lora.peft-lora-alpha = 64
 model.lora.peft-use-dora = true
 train.save-every-round = 5
 train.learning-rate-max = 5e-5
@@ -50,18 +50,18 @@ train.training-arguments.gradient-accumulation-steps = 1
 train.training-arguments.logging-steps = 1
 train.training-arguments.num-train-epochs = 3
 train.training-arguments.warmup-steps = 2
-train.training-arguments.max-steps = 10
+train.training-arguments.max-steps = 12
 train.training-arguments.save-steps = 1000
 train.training-arguments.save-total-limit = 10
 train.training-arguments.gradient-checkpointing = true
 train.training-arguments.max-grad-norm = 1.0
-train.training-arguments.lr-scheduler-type = "constant"
+train.training-arguments.lr-scheduler-type = "constant_with_warmup"
 train.training-arguments.bf16 = true
 train.training-arguments.tf32 = true
 train.training-arguments.optim = "paged_adamw_8bit"
-strategy.fraction-fit = 1.0
+strategy.fraction-fit = 0.4
 strategy.fraction-evaluate = 0.0
-num-server-rounds = 100
+num-server-rounds = 50
 
 [tool.flwr.app.config.static]
 dataset.name = "ethicalabs/Kurtis-E1-SFT"
@@ -70,6 +70,6 @@ dataset.name = "ethicalabs/Kurtis-E1-SFT"
 default = "local-simulation"
 
 [tool.flwr.federations.local-simulation]
-options.num-supernodes = 5
+options.num-supernodes = 10
 options.backend.client-resources.num-cpus = 8
 options.backend.client-resources.num-gpus = 1.0
