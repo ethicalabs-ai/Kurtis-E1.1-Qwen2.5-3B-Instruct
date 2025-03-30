@@ -4,7 +4,7 @@ Kurtis E1.1 fine-tuned with [flower](https://flower.ai/)
 
 ## Eval Results
 
-Evaluation tasks were performed with the [LM Evaluation Harness] (https://github.com/EleutherAI/lm-evaluation-harness) on an NVIDIA A40.
+Evaluation tasks were performed with the [LM Evaluation Harness](https://github.com/EleutherAI/lm-evaluation-harness) on an NVIDIA A40.
 
 
 ### hellaswag
