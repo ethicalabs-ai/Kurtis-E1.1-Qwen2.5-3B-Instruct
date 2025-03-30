@@ -1,3 +1,3 @@
-# Flwr-Kurtis-E1.1-Zero
+# Kurtis-E1.1-Qwen2.5-3B-Instruct
 
-Pseudo-pretraining experiment.
+Experiment for the new Kurtis E1.1 model. Work in progress!
