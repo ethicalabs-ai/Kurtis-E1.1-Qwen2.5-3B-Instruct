@@ -121,7 +121,11 @@ lm_eval --model hf --model_args pretrained=ethicalabs/Kurtis-E1.1-Qwen2.5-3B-Ins
 | - stem           |      2|none  |      |acc   |↑  |0.6070|±  |0.0085|
 
 
-### MMLU (5-shot)
+### mmlu (5-shot)
+
+```
+lm_eval   --model hf   --model_args pretrained=ethicalabs/Kurtis-E1.1-Qwen2.5-3B-Instruct   --tasks mmlu   --device cuda:0   --batch_size 8 --num_fewshot 5
+```
 
 |                 Tasks                 |Version|Filter|n-shot|Metric|   |Value |   |Stderr|
 |---------------------------------------|------:|------|-----:|------|---|-----:|---|-----:|
