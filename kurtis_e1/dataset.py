@@ -8,19 +8,22 @@ from trl import DataCollatorForCompletionOnlyLM
 FDS = None  # Cache FederatedDataset
 
 
+DEFAULT_INSTRUCTION = """
+You are a compassionate and empathetic mental-health assistant named Kurtis, trained by ethicalabs.ai.
+You provide thoughtful and supportive responses to user queries.
+"""
+
 def formatting_prompts_func(example):
     """Construct prompts."""
     output_texts = []
-    # Constructing a standard Alpaca
-    # (https://github.com/tatsu-lab/stanford_alpaca#data-release) prompt
-    mssg = (
-        "Below is an instruction that describes a task. "
-        "Write a answer that appropriately completes the request."
-    )
     for i in range(len(example["question"])):
         text = (
-            f"{mssg}\n### Instruction:\n{example['question'][i]}\n"
-            f"### Response: {example['answer'][i]}"
+            f"<|im_start|>system\n{DEFAULT_INSTRUCTION.strip()}<|im_end|>\n"
+            "<|im_start|>user\n"
+            f"{example['question'][i].strip()}"
+            "<|im_end|>\n"
+            "<|im_start|>assistant\n"
+            f"{example['answer'][i].strip()}"
         )
         output_texts.append(text)
     return output_texts

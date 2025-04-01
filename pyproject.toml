@@ -19,6 +19,7 @@ dependencies = [
     "sentencepiece==0.2.0",
     "omegaconf==2.3.0",
     "hf_transfer==0.1.8",
+    "wandb==0.19.8",
 ]
 
 [tool.hatch.build.targets.wheel]
@@ -40,7 +41,7 @@ model.lora.peft-lora-r = 16
 model.lora.peft-lora-alpha = 64
 model.lora.peft-use-dora = true
 train.save-every-round = 5
-train.learning-rate-max = 5e-5
+train.learning-rate-max = 2e-5
 train.learning-rate-min = 1e-6
 train.seq-length = 1024
 train.training-arguments.output-dir = ""
@@ -50,16 +51,16 @@ train.training-arguments.gradient-accumulation-steps = 1
 train.training-arguments.logging-steps = 1
 train.training-arguments.num-train-epochs = 3
 train.training-arguments.warmup-steps = 2
-train.training-arguments.max-steps = 12
+train.training-arguments.max-steps = 8
 train.training-arguments.save-steps = 1000
 train.training-arguments.save-total-limit = 10
 train.training-arguments.gradient-checkpointing = true
-train.training-arguments.max-grad-norm = 1.0
+train.training-arguments.max-grad-norm = 0.8
 train.training-arguments.lr-scheduler-type = "constant_with_warmup"
 train.training-arguments.bf16 = true
 train.training-arguments.tf32 = true
 train.training-arguments.optim = "paged_adamw_8bit"
-strategy.fraction-fit = 0.4
+strategy.fraction-fit = 0.6
 strategy.fraction-evaluate = 0.0
 num-server-rounds = 50
 
