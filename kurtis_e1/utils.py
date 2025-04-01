@@ -28,6 +28,7 @@ def save_and_merge_model(
         final_checkpoint_dir, device_map="auto", torch_dtype=torch_dtype
     )
     model = model.merge_and_unload()
+    tokenizer.save_pretrained(output_merged_dir)
     model.save_pretrained(output_merged_dir, safe_serialization=True)
     if push and hf_repo_id:
         model.push_to_hub(hf_repo_id, "Upload model")

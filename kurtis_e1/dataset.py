@@ -5,13 +5,10 @@ from flwr_datasets.partitioner import IidPartitioner
 from transformers import AutoTokenizer
 from trl import DataCollatorForCompletionOnlyLM
 
+from .config import DEFAULT_INSTRUCTION
+
 FDS = None  # Cache FederatedDataset
 
-
-DEFAULT_INSTRUCTION = """
-You are a compassionate and empathetic mental-health assistant named Kurtis, trained by ethicalabs.ai.
-You provide thoughtful and supportive responses to user queries.
-"""
 
 def formatting_prompts_func(example):
     """Construct prompts."""
@@ -35,7 +32,7 @@ def get_tokenizer_and_data_collator_and_propt_formatting(model_name: str):
         model_name, use_fast=True, padding_side="right"
     )
     tokenizer.pad_token = tokenizer.eos_token
-    response_template_with_context = "\n### Response:"  # alpaca response tag
+    response_template_with_context = "<|im_start|>assistant\n"
     response_template_ids = tokenizer.encode(
         response_template_with_context, add_special_tokens=False
     )[2:]
