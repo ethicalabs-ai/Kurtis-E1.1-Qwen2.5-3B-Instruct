@@ -46,7 +46,7 @@ train.learning-rate-min = 1e-6
 train.seq-length = 1024
 train.training-arguments.output-dir = ""
 train.training-arguments.learning-rate = ""
-train.training-arguments.per-device-train-batch-size = 4
+train.training-arguments.per-device-train-batch-size = 16
 train.training-arguments.gradient-accumulation-steps = 1
 train.training-arguments.logging-steps = 1
 train.training-arguments.num-train-epochs = 3
@@ -60,9 +60,9 @@ train.training-arguments.lr-scheduler-type = "constant"
 train.training-arguments.bf16 = true
 train.training-arguments.tf32 = true
 train.training-arguments.optim = "paged_adamw_8bit"
-strategy.fraction-fit = 0.6
+strategy.fraction-fit = 0.4
 strategy.fraction-evaluate = 0.0
-num-server-rounds = 50
+num-server-rounds = 100
 
 [tool.flwr.app.config.static]
 dataset.name = "ethicalabs/Kurtis-E1-SFT"
