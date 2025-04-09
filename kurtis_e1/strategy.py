@@ -12,10 +12,11 @@ from flwr.server.strategy import FedAvg
 
 class FlowerTuneLlm(FedAvg):
     """Customised FedAvg strategy implementation.
-    
+
     This class behaves just like FedAvg but also tracks the communication
     costs associated with `fit` over FL rounds.
     """
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.comm_tracker = CommunicationTracker()
@@ -52,6 +53,7 @@ class FlowerTuneLlm(FedAvg):
 
 class CommunicationTracker:
     """Communication costs tracker over FL rounds."""
+
     def __init__(self):
         self.curr_comm_cost = 0.0
 
@@ -61,8 +63,7 @@ class CommunicationTracker:
 
     def track(self, fit_list: List[Union[FitIns, FitRes]]):
         size_bytes_list = [
-            self._compute_bytes(fit_ele.parameters)
-            for fit_ele in fit_list
+            self._compute_bytes(fit_ele.parameters) for fit_ele in fit_list
         ]
         comm_cost = sum(size_bytes_list) / 1024**2
 
