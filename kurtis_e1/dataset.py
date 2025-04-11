@@ -4,8 +4,7 @@ from flwr_datasets import FederatedDataset
 from flwr_datasets.partitioner import IidPartitioner
 from transformers import AutoTokenizer
 from trl import DataCollatorForCompletionOnlyLM
-
-from .config import DEFAULT_INSTRUCTION
+from kurtis_e1.config import DEFAULT_INSTRUCTION
 
 FDS = None  # Cache FederatedDataset
 
@@ -13,14 +12,16 @@ FDS = None  # Cache FederatedDataset
 def formatting_prompts_func(example):
     """Construct prompts."""
     output_texts = []
+    # Constructing a standard Alpaca
+    # (https://github.com/tatsu-lab/stanford_alpaca#data-release) prompt
+    mssg = (
+        "Below is an instruction that describes a task. "
+        "Write a answer that appropriately completes the request."
+    )
     for i in range(len(example["question"])):
         text = (
-            f"<|im_start|>system\n{DEFAULT_INSTRUCTION.strip()}<|im_end|>\n"
-            "<|im_start|>user\n"
-            f"{example['question'][i].strip()}"
-            "<|im_end|>\n"
-            "<|im_start|>assistant\n"
-            f"{example['answer'][i].strip()}"
+            f"{mssg}\n### Instruction:\n{example['question'][i]}\n"
+            f"### Response: {example['answer'][i]}"
         )
         output_texts.append(text)
     return output_texts
@@ -32,7 +33,7 @@ def get_tokenizer_and_data_collator_and_propt_formatting(model_name: str):
         model_name, use_fast=True, padding_side="right"
     )
     tokenizer.pad_token = tokenizer.eos_token
-    response_template_with_context = "<|im_start|>assistant\n"
+    response_template_with_context = "\n### Response:"  # alpaca response tag
     response_template_ids = tokenizer.encode(
         response_template_with_context, add_special_tokens=False
     )[2:]
