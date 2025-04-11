@@ -1,6 +1,7 @@
 """Kurtis-E1: A Flower / FlowerTune app."""
 
 import os
+import wandb
 import warnings
 from typing import Dict, Tuple
 
@@ -110,7 +111,7 @@ def client_fn(context: Context) -> FlowerClient:
         data_collator,
         formatting_prompts_func,
     ) = get_tokenizer_and_data_collator_and_propt_formatting(cfg.model.name)
-
+    wandb.init(project="Kurtis E1")  # TODO: get project name from settings
     return FlowerClient(
         cfg.model,
         cfg.train,

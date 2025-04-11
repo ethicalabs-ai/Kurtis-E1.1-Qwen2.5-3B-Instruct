@@ -4,6 +4,7 @@ from flwr_datasets import FederatedDataset
 from flwr_datasets.partitioner import IidPartitioner
 from transformers import AutoTokenizer
 from trl import DataCollatorForCompletionOnlyLM
+from kurtis_e1.config import DEFAULT_INSTRUCTION
 
 FDS = None  # Cache FederatedDataset
 
